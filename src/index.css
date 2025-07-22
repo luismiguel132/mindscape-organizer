@@ -2,39 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* MindHub Design System - Productivity SaaS App */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors */
+    --background: 192 15% 94%; /* Light Gray #ECF0F1 */
+    --foreground: 210 22% 29%; /* Graphite #34495E */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card system */
+    --card: 0 0% 100%; /* Pure white for cards */
+    --card-foreground: 210 22% 29%;
 
+    /* Popover system */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 22% 29%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Teal brand color */
+    --primary: 168 76% 42%; /* Teal #1ABC9C */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 168 76% 52%; /* Lighter teal for effects */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Dark Blue */
+    --secondary: 210 29% 24%; /* Dark Blue #2C3E50 */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Golden Yellow */
+    --accent: 48 89% 50%; /* Golden Yellow #F1C40F */
+    --accent-foreground: 210 29% 24%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted colors */
+    --muted: 192 15% 88%;
+    --muted-foreground: 210 22% 45%;
 
+    /* Interactive states */
+    --hover: 168 76% 47%;
+    --focus: 168 76% 37%;
+
+    /* Functional colors */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Border and input */
+    --border: 210 16% 82%;
+    --input: 0 0% 100%;
+    --ring: 168 76% 42%;
 
     --radius: 0.5rem;
 
@@ -100,6 +112,64 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+
+  /* Custom gradients */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--accent) / 0.8) 100%);
+  }
+
+  .gradient-card {
+    background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Custom shadows */
+  .shadow-card {
+    box-shadow: 0 2px 8px -2px hsl(var(--primary) / 0.1), 
+                0 4px 12px -4px hsl(var(--foreground) / 0.05);
+  }
+
+  .shadow-primary {
+    box-shadow: 0 4px 20px -4px hsl(var(--primary) / 0.3);
+  }
+
+  /* Animations */
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px hsl(var(--primary) / 0.2);
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }

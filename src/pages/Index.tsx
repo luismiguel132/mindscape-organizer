@@ -1,11 +1,23 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Routes, Route } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
+import { Dashboard } from "@/components/Dashboard";
+import { Study } from "@/components/Study";
+import { Meetings } from "@/components/Meetings";
+import { Settings } from "@/components/Settings";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      
+      {/* Main content with left margin for sidebar on desktop */}
+      <div className="md:ml-64 p-6 md:p-8">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/study" element={<Study />} />
+          <Route path="/meetings" element={<Meetings />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
       </div>
     </div>
   );
