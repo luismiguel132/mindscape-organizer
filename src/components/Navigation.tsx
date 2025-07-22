@@ -7,10 +7,13 @@ import {
   Settings, 
   Brain,
   Menu,
-  X
+  X,
+  LogOut
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import CortexMascot from "@/assets/cortex-mascot.png";
 
 const navigationItems = [
@@ -42,6 +45,23 @@ const navigationItems = [
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Erro ao sair",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Logout realizado",
+        description: "Você foi desconectado com sucesso.",
+      });
+    }
+  };
 
   return (
     <>
@@ -119,13 +139,16 @@ export const Navigation = () => {
           ))}
         </nav>
 
-        {/* Footer */}
+        {/* Logout Button */}
         <div className="absolute bottom-4 left-4 right-4">
-          <div className="text-center p-3 rounded-lg bg-muted/30">
-            <p className="text-xs text-muted-foreground">
-              Made with 💙 for productivity
-            </p>
-          </div>
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="w-full flex items-center gap-2 hover:bg-destructive hover:text-destructive-foreground"
+          >
+            <LogOut className="h-4 w-4" />
+            Sair
+          </Button>
         </div>
       </div>
 
